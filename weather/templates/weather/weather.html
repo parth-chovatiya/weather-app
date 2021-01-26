@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Weather Data</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.css" />
+
+</head>
+
+<body>
+    <section class="hero is-primary">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title">
+                    What's the weather like?
+                </h1>
+            </div>
+        </div>
+    </section>
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-offset-3 is-5">
+                    <form method="POST" autocomplete="off">
+                        {% csrf_token %}
+                        <div class="field has-addons">
+                            <div class="control is-expanded">
+                                {{ form.name }}
+                            </div>
+                            <br>
+                            <div class="control">
+                                <button type="submit" class="button is-info">
+                                    Search City
+                                </button>
+                            </div>
+                        </div>
+                        {% if message %}
+                        <div class="notification {{ message_class }}">
+                            {{ message }}
+                        </div>
+                        {% endif %}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-offset-3 is-5">
+                    <div class="box">
+                        <article class="media">
+                            <div class="media-left">
+                                <figure class="image is-50x50">
+                                    <img src="http://openweathermap.org/img/w/{{ city_weather.icon }}.png" alt="Image">
+                                </figure>
+                            </div>
+                            <div class="media-content">
+                                <div class="content">
+                                    <p>
+                                        <span class="title">{{ city_weather.city }}</span>
+                                        <br>
+                                        <span class="subtitle">{{ city_weather.temperature_f }}° F / {{ city_weather.temperature_c }}° C</span>
+                                        <br>
+                                        <span class="subtitle" style="font-size:18px"> {{ city_weather.description }} </span>
+                                        <br><br>
+                                        <span class="subtitle" style="font-size:18px">Minimum Temp : {{ city_weather.min_temperature_f }}° F / {{ city_weather.min_temperature_c }}° C</span>
+                                        <br>
+                                        <span class="subtitle" style="font-size:18px">Maximum Temp : {{ city_weather.max_temperature_f }}° F / {{ city_weather.max_temperature_c }}° C</span>
+                                        <br>
+                                        <span class="subtitle" style="font-size:18px"> Pressure : {{city_weather.pressure}} hPa </span>
+                                        <br>
+                                        <span class="subtitle" style="font-size:18px"> Speed : {{city_weather.speed}} km/h </span>
+                                        <br>
+                                        <span class="subtitle" style="font-size:18px"> Humidity : {{city_weather.humidity}} % </span>
+                                        <br>
+                                    </p>
+                                    <span style="font-size:17px">
+                                        <b><u>Your Location</u> :-</b> <br>
+                                        IP Address : {{city_weather.ip}} <br>
+                                        City : {{city_weather.user_city}} <br>
+                                        Region : {{city_weather.region}}<br>
+                                        Country : {{city_weather.country}}<br>
+                                        Timezone : {{city_weather.timezone}}<br>
+                                        Country Code : {{city_weather.country_code}}<br>
+                                    </span>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    </footer>
+
+
+</body>
+
+</html>
