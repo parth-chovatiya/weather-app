@@ -6,7 +6,7 @@ from .forms import CityForm
 
 
 def index(request):
-    url = 'http://api.openweathermap.org/data/2.5/weather?q={}&units=imperial&appid=3fcee23530e10f63967900ee2e1e75e5'
+    url = 'http://api.openweathermap.org/data/2.5/weather?q={}&units=imperial&appid=API'
 
 
 #   find location of user
